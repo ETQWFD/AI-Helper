@@ -39,29 +39,28 @@ public class UpdateChecker {
 
     public void checkForUpdate(CheckCallback callback) {
         executor.execute(() -> {
+            String apiUrl = "https://api.github.com/repos/" + App.GITHUB_OWNER + "/"
+                    + App.GITHUB_SOFTWARE_REPO + "/releases/latest";
+            // 国内镜像备选
+            String[] apiMirrors = new String[] {
+                apiUrl,
+                "https://ghproxy.com/" + apiUrl,
+                "https://gh.api.99988866.xyz/" + apiUrl
+            };
+
+            String response = null;
+            for (String mirror : apiMirrors) {
+                response = httpGet(mirror, 3);
+                if (response != null) break;
+            }
+
+            if (response == null) {
+                postError(callback, "无法连接GitHub，请检查网络");
+                return;
+            }
+
             try {
-                String apiUrl = "https://api.github.com/repos/" + App.GITHUB_OWNER + "/"
-                        + App.GITHUB_SOFTWARE_REPO + "/releases/latest";
-                URL url = new URL(apiUrl);
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("GET");
-                conn.setRequestProperty("Accept", "application/vnd.github.v3+json");
-                conn.setConnectTimeout(15000);
-                conn.setReadTimeout(15000);
-
-                int code = conn.getResponseCode();
-                if (code != 200) {
-                    postError(callback, "检查更新失败(" + code + ")");
-                    return;
-                }
-
-                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                StringBuilder sb = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) sb.append(line);
-                reader.close();
-
-                JSONObject release = new JSONObject(sb.toString());
+                JSONObject release = new JSONObject(response);
                 String tagName = release.getString("tag_name");
                 String body = release.optString("body", "");
                 String downloadUrl = null;
@@ -81,18 +80,46 @@ public class UpdateChecker {
                     return;
                 }
 
-                // Compare versions
                 String currentVersion = "0.1";
                 if (isNewerVersion(tagName, currentVersion)) {
                     postUpdateAvailable(callback, tagName, downloadUrl, body);
                 } else {
                     postNoUpdate(callback);
                 }
-
             } catch (Exception e) {
-                postError(callback, "检查更新错误: " + e.getMessage());
+                postError(callback, "解析更新信息失败: " + e.getMessage());
             }
         });
+    }
+
+    private String httpGet(String urlStr, int maxRetries) {
+        for (int attempt = 0; attempt < maxRetries; attempt++) {
+            HttpURLConnection conn = null;
+            try {
+                URL url = new URL(urlStr);
+                conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("GET");
+                conn.setRequestProperty("Accept", "application/vnd.github.v3+json");
+                conn.setRequestProperty("User-Agent", "AIHelper/0.1");
+                conn.setConnectTimeout(20000);
+                conn.setReadTimeout(25000);
+                int code = conn.getResponseCode();
+                if (code == 200) {
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    StringBuilder sb = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) sb.append(line);
+                    reader.close();
+                    return sb.toString();
+                }
+            } catch (Exception e) {
+                // retry
+            } finally {
+                if (conn != null) conn.disconnect();
+            }
+            try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
+        }
+        return null;
     }
 
     private boolean isNewerVersion(String remote, String current) {
@@ -117,47 +144,92 @@ public class UpdateChecker {
         executor.execute(() -> {
             try {
                 mainHandler.post(() -> {
-                    AlertDialog progress = new AlertDialog.Builder(activity)
-                            .setTitle("下载更新")
-                            .setMessage("正在下载 v" + version + "...")
-                            .setCancelable(false)
-                            .show();
+                    try {
+                        new AlertDialog.Builder(activity)
+                                .setTitle("下载更新")
+                                .setMessage("正在下载 v" + version + "...")
+                                .setCancelable(false)
+                                .show();
+                    } catch (Exception ignored) {}
                 });
 
-                URL url = new URL(downloadUrl);
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setConnectTimeout(30000);
-                conn.setReadTimeout(120000);
-                InputStream is = conn.getInputStream();
-
-                File updatesDir = new File(context.getFilesDir(), "updates");
-                if (!updatesDir.exists()) updatesDir.mkdirs();
-                File apkFile = new File(updatesDir, "AIHelper-v" + version + ".apk");
-
-                FileOutputStream fos = new FileOutputStream(apkFile);
-                byte[] buffer = new byte[8192];
-                int len;
-                while ((len = is.read(buffer)) != -1) {
-                    fos.write(buffer, 0, len);
+                // 构建下载镜像列表
+                String[] downloadMirrors;
+                if (downloadUrl.contains("github.com")) {
+                    downloadMirrors = new String[] {
+                        downloadUrl,
+                        "https://ghproxy.com/" + downloadUrl,
+                        "https://gh.api.99988866.xyz/" + downloadUrl
+                    };
+                } else {
+                    downloadMirrors = new String[] { downloadUrl };
                 }
-                fos.close();
-                is.close();
 
-                mainHandler.post(() -> {
-                    // Dismiss progress and show install prompt
-                    installApk(apkFile, activity);
-                });
+                File apkFile = null;
+                for (String mirror : downloadMirrors) {
+                    apkFile = downloadApk(mirror, version);
+                    if (apkFile != null && apkFile.length() > 100000) break;
+                }
+
+                if (apkFile == null || apkFile.length() < 100000) {
+                    mainHandler.post(() -> {
+                        try {
+                            new AlertDialog.Builder(activity)
+                                    .setTitle("下载失败")
+                                    .setMessage("所有下载源均失败，请检查网络后重试")
+                                    .setPositiveButton("确定", null)
+                                    .show();
+                        } catch (Exception ignored) {}
+                    });
+                    return;
+                }
+
+                final File finalApk = apkFile;
+                mainHandler.post(() -> installApk(finalApk, activity));
 
             } catch (Exception e) {
                 mainHandler.post(() -> {
-                    new AlertDialog.Builder(activity)
-                            .setTitle("下载失败")
-                            .setMessage(e.getMessage())
-                            .setPositiveButton("确定", null)
-                            .show();
+                    try {
+                        new AlertDialog.Builder(activity)
+                                .setTitle("下载失败")
+                                .setMessage(e.getMessage())
+                                .setPositiveButton("确定", null)
+                                .show();
+                    } catch (Exception ignored) {}
                 });
             }
         });
+    }
+
+    private File downloadApk(String urlStr, String version) {
+        HttpURLConnection conn = null;
+        try {
+            URL url = new URL(urlStr);
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setConnectTimeout(30000);
+            conn.setReadTimeout(120000);
+            conn.setRequestProperty("User-Agent", "AIHelper/0.1");
+            conn.setInstanceFollowRedirects(true);
+            InputStream is = conn.getInputStream();
+
+            File updatesDir = new File(context.getFilesDir(), "updates");
+            if (!updatesDir.exists()) updatesDir.mkdirs();
+            File apkFile = new File(updatesDir, "AIHelper-v" + version + ".apk");
+
+            FileOutputStream fos = new FileOutputStream(apkFile);
+            byte[] buffer = new byte[8192];
+            int len;
+            while ((len = is.read(buffer)) != -1) {
+                fos.write(buffer, 0, len);
+            }
+            fos.close();
+            is.close();
+            return apkFile;
+        } catch (Exception e) {
+            return null;
+        } finally {
+            if (conn != null) conn.disconnect();
+        }
     }
 
     private void installApk(File apkFile, Activity activity) {

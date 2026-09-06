@@ -116,13 +116,37 @@ public class AccountManager {
     }
 
     private String fetchUrl(String urlStr) {
+        // Build mirror list for GitHub raw content (国内网络优化)
+        String[] mirrors = buildMirrors(urlStr);
+        for (String mirror : mirrors) {
+            String result = fetchSingle(mirror);
+            if (result != null) return result;
+        }
+        return null;
+    }
+
+    private String[] buildMirrors(String originalUrl) {
+        if (originalUrl.contains("raw.githubusercontent.com")) {
+            String path = originalUrl.replace("https://raw.githubusercontent.com/", "");
+            return new String[] {
+                originalUrl,
+                "https://raw.gitmirror.com/" + path,
+                "https://ghproxy.com/https://raw.githubusercontent.com/" + path,
+                "https://gh.api.99988866.xyz/https://raw.githubusercontent.com/" + path
+            };
+        }
+        return new String[] { originalUrl };
+    }
+
+    private String fetchSingle(String urlStr) {
         HttpURLConnection conn = null;
         try {
             URL url = new URL(urlStr);
             conn = (HttpURLConnection) url.openConnection();
-            conn.setConnectTimeout(10000);
-            conn.setReadTimeout(10000);
+            conn.setConnectTimeout(15000);
+            conn.setReadTimeout(20000);
             conn.setRequestMethod("GET");
+            conn.setRequestProperty("User-Agent", "AIHelper/0.1");
             int code = conn.getResponseCode();
             if (code != 200) return null;
             BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
