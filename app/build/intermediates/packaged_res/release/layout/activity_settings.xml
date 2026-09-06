@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_dark"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp">
+
+            <Button
+                android:id="@+id/btn_back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:text="←"
+                android:textSize="18sp"
+                android:textColor="@color/text_primary"
+                android:background="@drawable/btn_secondary"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="设置"
+                android:textColor="@color/text_primary"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginEnd="40dp"/>
+        </LinearLayout>
+
+        <!-- AI Mode -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="AI配置模式"
+            android:textColor="@color/text_primary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <RadioGroup
+            android:id="@+id/rg_ai_mode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+
+            <RadioButton
+                android:id="@+id/rb_custom"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="自定义AI"
+                android:textColor="@color/text_primary"/>
+
+            <RadioButton
+                android:id="@+id/rb_applied"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="申请的AI"
+                android:textColor="@color/text_primary"/>
+        </RadioGroup>
+
+        <!-- Custom AI Config -->
+        <LinearLayout
+            android:id="@+id/layout_custom_ai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="AI地址 (完整URL)"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp"
+                android:layout_marginBottom="4dp"/>
+
+            <EditText
+                android:id="@+id/et_ai_url"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="https://api.example.com/v1/chat/completions"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_hint"
+                android:background="@drawable/edit_bg"
+                android:padding="12dp"
+                android:textSize="13sp"
+                android:layout_marginBottom="12dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="API Key"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp"
+                android:layout_marginBottom="4dp"/>
+
+            <EditText
+                android:id="@+id/et_ai_key"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="sk-..."
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_hint"
+                android:background="@drawable/edit_bg"
+                android:padding="12dp"
+                android:textSize="13sp"
+                android:layout_marginBottom="12dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="AI模型名称"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp"
+                android:layout_marginBottom="4dp"/>
+
+            <EditText
+                android:id="@+id/et_ai_name"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="例如: gpt-3.5-turbo"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_hint"
+                android:background="@drawable/edit_bg"
+                android:padding="12dp"
+                android:textSize="13sp"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_save_ai"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="保存AI配置"
+            android:textColor="@android:color/white"
+            android:background="@drawable/btn_primary"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Apply -->
+        <Button
+            android:id="@+id/btn_apply"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="申请账号"
+            android:textColor="@color/text_primary"
+            android:background="@drawable/btn_secondary"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- Update -->
+        <Button
+            android:id="@+id/btn_check_update"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="检测更新"
+            android:textColor="@color/text_primary"
+            android:background="@drawable/btn_secondary"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/tv_update_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="当前版本: v0.1"
+            android:textColor="@color/text_hint"
+            android:textSize="12sp"
+            android:gravity="center"/>
+    </LinearLayout>
+</ScrollView>

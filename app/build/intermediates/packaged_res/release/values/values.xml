@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="accent">#FF00D4FF</color>
+    <color name="accent_dark">#FF0099CC</color>
+    <color name="bg_dark">#FF1A1A2E</color>
+    <color name="btn_primary_end">#FF7B2FFD</color>
+    <color name="btn_primary_start">#FF00D4FF</color>
+    <color name="btn_secondary_bg">#FF232340</color>
+    <color name="card_bg">#FF16213E</color>
+    <color name="divider">#FF2A2A40</color>
+    <color name="edit_bg">#FF1E1E35</color>
+    <color name="ic_launcher_background">#FF1A1A2E</color>
+    <color name="screen_info_bg">#FF0F0F1A</color>
+    <color name="text_hint">#FF6A6A80</color>
+    <color name="text_primary">#FFEAEAEA</color>
+    <color name="text_secondary">#FFB0B0C0</color>
+    <string name="accessibility_desc">AI帮助器需要无障碍权限来读取屏幕内容并执行点击、滑动等操作，以帮助用户完成任务。AI仅使用权限帮助用户，不会损坏任何数据。</string>
+    <string name="accessibility_label">AI帮助器 无障碍服务</string>
+    <string name="app_name">AI帮助器</string>
+    <style name="Theme.AIHelper" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/accent</item>
+        <item name="colorPrimaryDark">@color/accent_dark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="android:windowBackground">@color/bg_dark</item>
+        <item name="android:statusBarColor">@color/bg_dark</item>
+        <item name="android:navigationBarColor">@color/bg_dark</item>
+    </style>
+</resources>

@@ -1,0 +1,4 @@
+#Sun Sep 06 16:56:35 SGT 2026
+base.0=/home/user/AI-Helper-project/app/build/intermediates/dex/release/mergeDexRelease/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex

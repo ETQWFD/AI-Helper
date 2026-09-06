@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_dark">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="12dp"
+        android:background="@color/card_bg">
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:text="←"
+            android:textSize="16sp"
+            android:textColor="@color/text_primary"
+            android:background="@drawable/btn_secondary"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="AI聊天"
+            android:textColor="@color/text_primary"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center"/>
+
+        <Button
+            android:id="@+id/btn_refresh_screen"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:text="⟳"
+            android:textSize="16sp"
+            android:textColor="@color/text_primary"
+            android:background="@drawable/btn_secondary"/>
+    </LinearLayout>
+
+    <!-- Screen info -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/screen_info_bg"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/tv_screen_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_secondary"
+            android:textSize="10sp"
+            android:fontFamily="monospace"/>
+    </ScrollView>
+
+    <!-- Chat messages -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_chat"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="8dp"/>
+
+    <!-- Input -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:background="@color/card_bg"
+        android:gravity="center_vertical">
+
+        <EditText
+            android:id="@+id/et_input"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:hint="输入消息..."
+            android:textColor="@color/text_primary"
+            android:textColorHint="@color/text_hint"
+            android:background="@drawable/edit_bg"
+            android:padding="10dp"
+            android:textSize="14sp"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/btn_send"
+            android:layout_width="60dp"
+            android:layout_height="44dp"
+            android:text="发送"
+            android:textColor="@android:color/white"
+            android:background="@drawable/btn_primary"
+            android:textSize="13sp"/>
+    </LinearLayout>
+</LinearLayout>

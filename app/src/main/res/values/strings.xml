@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AI帮助器</string>
+    <string name="accessibility_label">AI帮助器 无障碍服务</string>
+    <string name="accessibility_desc">AI帮助器需要无障碍权限来读取屏幕内容并执行点击、滑动等操作，以帮助用户完成任务。AI仅使用权限帮助用户，不会损坏任何数据。</string>
+</resources>

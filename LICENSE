@@ -1,0 +1,33 @@
+MIT License
+
+Copyright (c) 2026 ET协会 / ETC
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+【法律声明】
+1. 本软件受 MIT 许可证保护，版权归 ET协会/ETC 所有。
+2. 本软件的无障碍服务仅用于帮助用户操作设备，AI 不会损坏用户的任何文件、数据或重要设置。
+3. 如因用户不当使用导致数据丢失，开发者不承担任何责任。
+4. 本软件仅在真机及授权虚拟机（UU虚拟机、光速虚拟机）上运行，其他环境下软件将自毁其安装包。
+   自毁行为仅针对开发者自身的分发包，不涉及用户个人数据。
+5. 本软件不包含任何恶意代码，不收集用户隐私数据，所有账号数据均存储于用户指定的 GitHub 仓库。
+6. AI 辅助游戏功能以正常玩家水平操作，不修改游戏数据，不使用作弊手段。用户应遵守所使用游戏的服务条款。
+7. 公安机关及相关执法部门如需调查，请通过 etqe1234@outlook.com 联系开发者。
