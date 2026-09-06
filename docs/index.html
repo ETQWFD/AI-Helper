@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI帮助器 - 智能无障碍AI助手</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #0f0f1a;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            padding: 60px 20px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0,212,255,0.08) 0%, transparent 50%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+        .app-icon {
+            width: 100px; height: 100px;
+            border-radius: 24px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #00d4ff, #7b2ff7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            box-shadow: 0 8px 32px rgba(0,212,255,0.3);
+            position: relative;
+        }
+        .hero h1 {
+            font-size: 36px;
+            background: linear-gradient(90deg, #00d4ff, #7b2ff7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+            position: relative;
+        }
+        .hero .subtitle {
+            font-size: 16px;
+            color: #8899aa;
+            margin-bottom: 32px;
+            position: relative;
+        }
+        .download-btn {
+            display: inline-block;
+            padding: 14px 40px;
+            background: linear-gradient(135deg, #00d4ff, #7b2ff7);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 4px 20px rgba(0,212,255,0.4);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 28px rgba(0,212,255,0.5);
+        }
+        .version-info {
+            margin-top: 16px;
+            font-size: 13px;
+            color: #556677;
+            position: relative;
+        }
+        .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+        .section { margin-bottom: 40px; }
+        .section h2 {
+            font-size: 22px;
+            color: #00d4ff;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #2a2a40;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+        .feature-card {
+            background: #16213e;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #2a2a40;
+        }
+        .feature-card .icon { font-size: 28px; margin-bottom: 8px; }
+        .feature-card h3 { font-size: 15px; color: #e0e0e0; margin-bottom: 6px; }
+        .feature-card p { font-size: 13px; color: #8899aa; }
+        .steps { list-style: none; counter-reset: step; }
+        .steps li {
+            counter-increment: step;
+            padding: 12px 0 12px 48px;
+            position: relative;
+            border-bottom: 1px solid #1e1e35;
+            font-size: 14px;
+        }
+        .steps li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0; top: 12px;
+            width: 32px; height: 32px;
+            background: linear-gradient(135deg, #00d4ff, #7b2ff7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            color: white;
+        }
+        .notice {
+            background: #1a1a2e;
+            border-left: 4px solid #f39c12;
+            padding: 16px 20px;
+            border-radius: 0 8px 8px 0;
+            font-size: 13px;
+            color: #aa9977;
+        }
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            border-top: 1px solid #2a2a40;
+            font-size: 12px;
+            color: #556677;
+        }
+        .footer a { color: #00d4ff; text-decoration: none; }
+        .badge {
+            display: inline-block;
+            padding: 2px 10px;
+            background: #27ae60;
+            border-radius: 10px;
+            font-size: 11px;
+            color: white;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="app-icon">🤖</div>
+        <h1>AI帮助器</h1>
+        <p class="subtitle">基于无障碍服务的智能AI助手 · 让AI帮你操作手机</p>
+        <a href="https://github.com/ETQWFD/AI-Helper/releases/latest/download/AIHelper-v0.1.apk" class="download-btn" id="downloadBtn">
+            ⬇ 立即下载 APK
+        </a>
+        <p class="version-info">版本 v0.1 · 开发者 ETC (ET协会) · 支持 32位/64位 · MIT License</p>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>✨ 功能特性</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <div class="icon">💬</div>
+                    <h3>AI 智能聊天</h3>
+                    <p>支持自定义AI配置或使用预设AI，自然语言交互</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">👆</div>
+                    <h3>无障碍操作</h3>
+                    <p>AI可读取屏幕并执行点击、滑动、输入、返回等操作</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🎮</div>
+                    <h3>游戏辅助</h3>
+                    <p>AI以正常玩家水平辅助操作游戏，不修改数据不作弊</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🔐</div>
+                    <h3>账号系统</h3>
+                    <p>邮箱申请账号，登录后免配置AI，专属头像</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🔄</div>
+                    <h3>自动更新</h3>
+                    <p>检测GitHub Release新版本，应用内下载安装</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🛡️</div>
+                    <h3>安全可靠</h3>
+                    <p>AI仅帮助操作，不损坏用户任何文件和数据</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📖 使用方法</h2>
+            <ol class="steps">
+                <li>下载并安装 AI帮助器 APK</li>
+                <li>首次运行查看账号申请说明（可跳过，使用自定义AI）</li>
+                <li>在主界面点击「获取无障碍模式」，在系统设置中开启无障碍服务</li>
+                <li>在「设置」中配置AI：自定义AI（输入地址/Key/模型）或登录后使用申请的AI</li>
+                <li>返回主界面点击「开始」，进入聊天界面</li>
+                <li>输入你的需求，AI会分析屏幕并自动执行操作</li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2>📧 账号申请</h2>
+            <p style="margin-bottom:12px;font-size:14px;">发送邮件至 <strong style="color:#00d4ff;">etqe1234@outlook.com</strong>，包含以下信息：</p>
+            <ul style="margin-left:20px;font-size:14px;color:#aaabbc;">
+                <li>您的真实名称</li>
+                <li>需要注册的用户名</li>
+                <li>QQ号或其他联系邮箱</li>
+                <li>将要设置的密码</li>
+            </ul>
+            <p style="margin-top:12px;font-size:13px;color:#667;">开发者忙于上学，将在一年内回复。若未收到回复请重新申请。</p>
+        </div>
+
+        <div class="section">
+            <h2>⚠️ 法律声明</h2>
+            <div class="notice">
+                <p>1. 本软件受 MIT 许可证保护，版权归 ET协会/ETC 所有。</p>
+                <p>2. AI 仅使用无障碍权限帮助用户操作，不会损坏任何文件或数据。</p>
+                <p>3. 如因用户不当使用导致数据丢失，开发者不承担责任。</p>
+                <p>4. AI 辅助游戏以正常玩家水平操作，不使用作弊手段，用户应遵守游戏服务条款。</p>
+                <p>5. 软件仅在真机及授权虚拟机（UU虚拟机、光速虚拟机）上运行。</p>
+                <p>6. 公安机关及执法部门如需调查，请联系 etqe1234@outlook.com。</p>
+            </div>
+        </div>
+
+        <div class="section" style="text-align:center;">
+            <a href="https://github.com/ETQWFD/AI-Helper" target="_blank" style="color:#00d4ff;text-decoration:none;margin-right:20px;">📂 开源仓库</a>
+            <a href="https://github.com/ETQWFD/AI-Helper-Accounts" target="_blank" style="color:#00d4ff;text-decoration:none;margin-right:20px;">⚙️ 管理后台</a>
+            <a href="https://github.com/ETQWFD/AI-Helper/releases" target="_blank" style="color:#00d4ff;text-decoration:none;">📦 所有版本</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2026 ET协会 / ETC · AI帮助器 v0.1 · MIT License</p>
+        <p style="margin-top:4px;">本软件不包含任何恶意代码，不收集用户隐私</p>
+    </div>
+
+    <script>
+        // 动态获取最新 release 下载链接
+        fetch('https://api.github.com/repos/ETQWFD/AI-Helper/releases/latest')
+            .then(r => r.json())
+            .then(data => {
+                if (data.assets) {
+                    const apk = data.assets.find(a => a.name.endsWith('.apk'));
+                    if (apk) {
+                        document.getElementById('downloadBtn').href = apk.browser_download_url;
+                    }
+                }
+            })
+            .catch(() => {});
+    </script>
+</body>
+</html>
