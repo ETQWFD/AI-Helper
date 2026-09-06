@@ -4,35 +4,28 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
-    private RecyclerView rvChat;
+    private LinearLayout chatContainer;
+    private ScrollView scrollView;
     private EditText etInput;
     private Button btnSend;
     private TextView tvScreenInfo;
-    private ChatAdapter adapter;
-    private List<ChatMessage> messages = new ArrayList<>();
     private AIClient aiClient;
     private boolean isProcessing = false;
-
-    public static class ChatMessage {
-        public String role; // "user" or "ai" or "system"
-        public String content;
-        public ChatMessage(String role, String content) {
-            this.role = role;
-            this.content = content;
-        }
-    }
+    private final Handler handler = new Handler(Looper.getMainLooper());
+    private Runnable thinkingRunnable;
+    private TextView thinkingView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,19 +33,15 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
 
         aiClient = new AIClient(this);
-        rvChat = findViewById(R.id.rv_chat);
+        chatContainer = findViewById(R.id.chat_container);
+        scrollView = findViewById(R.id.scroll_chat);
         etInput = findViewById(R.id.et_input);
         btnSend = findViewById(R.id.btn_send);
         tvScreenInfo = findViewById(R.id.tv_screen_info);
 
-        adapter = new ChatAdapter(messages);
-        rvChat.setLayoutManager(new LinearLayoutManager(this));
-        rvChat.setAdapter(adapter);
-
-        addMessage("system", "AI帮助器已启动。无障碍服务已连接，AI可以读取屏幕并执行操作。请输入你的需求。");
+        addMessage("system", "AI帮助器 v0.2 已启动。无障碍服务已连接，可以读取屏幕并执行操作。请输入你的需求。");
 
         btnSend.setOnClickListener(v -> sendMessage());
-
         findViewById(R.id.btn_refresh_screen).setOnClickListener(v -> refreshScreenInfo());
         findViewById(R.id.btn_back).setOnClickListener(v -> finish());
 
@@ -61,17 +50,17 @@ public class ChatActivity extends AppCompatActivity {
 
     private void refreshScreenInfo() {
         MyAccessibilityService service = MyAccessibilityService.getInstance();
-        if (service != null) {
+        if (service != null && MyAccessibilityService.isServiceEnabled()) {
             String desc = service.getScreenDescription();
-            tvScreenInfo.setText(desc.length() > 500 ? desc.substring(0, 500) + "..." : desc);
+            tvScreenInfo.setText(desc.length() > 400 ? desc.substring(0, 400) + "..." : desc);
         } else {
-            tvScreenInfo.setText("无障碍服务未连接");
+            tvScreenInfo.setText("无障碍服务未连接，请返回主界面开启");
         }
     }
 
     private void sendMessage() {
         if (isProcessing) {
-            Toast.makeText(this, "AI正在处理中，请稍候", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "正在处理中，请稍候", Toast.LENGTH_SHORT).show();
             return;
         }
         String text = etInput.getText().toString().trim();
@@ -81,35 +70,101 @@ public class ChatActivity extends AppCompatActivity {
         etInput.setText("");
         isProcessing = true;
         btnSend.setEnabled(false);
+        btnSend.setText("处理中");
 
-        // Get screen context
+        showThinking();
+
         String screenContext = "";
         MyAccessibilityService service = MyAccessibilityService.getInstance();
-        if (service != null) {
-            screenContext = service.getScreenDescription();
-        }
+        if (service != null) screenContext = service.getScreenDescription();
 
         aiClient.sendMessage(text, screenContext, new AIClient.Callback() {
             @Override
             public void onSuccess(String response, String actionsJson) {
+                hideThinking();
                 isProcessing = false;
                 btnSend.setEnabled(true);
-                addMessage("ai", response);
-
-                // Execute actions if present
-                if (actionsJson != null && !actionsJson.isEmpty()) {
-                    addMessage("system", "AI正在执行操作...");
-                    executeActionsAsync(actionsJson);
-                }
+                btnSend.setText("发送");
+                typeMessage(response, () -> {
+                    if (actionsJson != null && !actionsJson.isEmpty()) {
+                        addMessage("system", "正在执行操作...");
+                        executeActionsAsync(actionsJson);
+                    }
+                });
             }
 
             @Override
             public void onError(String error) {
+                hideThinking();
                 isProcessing = false;
                 btnSend.setEnabled(true);
+                btnSend.setText("发送");
                 addMessage("system", "错误: " + error);
             }
         });
+    }
+
+    private void showThinking() {
+        thinkingView = new TextView(this);
+        thinkingView.setText("正在思考.");
+        thinkingView.setTextSize(15);
+        thinkingView.setTextColor(0xFF8899AA);
+        thinkingView.setPadding(24, 12, 24, 12);
+        chatContainer.addView(thinkingView);
+        scrollToBottom();
+
+        final int[] dotCount = {1};
+        thinkingRunnable = new Runnable() {
+            @Override
+            public void run() {
+                if (thinkingView != null) {
+                    StringBuilder dots = new StringBuilder();
+                    for (int i = 0; i < dotCount[0]; i++) dots.append(".");
+                    thinkingView.setText("正在思考" + dots.toString());
+                    dotCount[0] = dotCount[0] % 3 + 1;
+                    handler.postDelayed(this, 400);
+                }
+            }
+        };
+        handler.postDelayed(thinkingRunnable, 400);
+    }
+
+    private void hideThinking() {
+        if (thinkingRunnable != null) {
+            handler.removeCallbacks(thinkingRunnable);
+            thinkingRunnable = null;
+        }
+        if (thinkingView != null) {
+            chatContainer.removeView(thinkingView);
+            thinkingView = null;
+        }
+    }
+
+    private void typeMessage(String text, Runnable onComplete) {
+        TextView tv = new TextView(this);
+        tv.setTextSize(15);
+        tv.setTextColor(0xFFB0C4DE);
+        tv.setPadding(24, 12, 24, 12);
+        chatContainer.addView(tv);
+        scrollToBottom();
+
+        final int[] index = {0};
+        final char[] chars = text.toCharArray();
+        Runnable typeRunnable = new Runnable() {
+            @Override
+            public void run() {
+                if (index[0] < chars.length) {
+                    int batch = Math.min(3, chars.length - index[0]);
+                    tv.append(new String(chars, index[0], batch));
+                    index[0] += batch;
+                    scrollToBottom();
+                    handler.postDelayed(this, 25);
+                } else {
+                    if (onComplete != null) onComplete.run();
+                }
+            }
+        };
+        handler.post(typeRunnable);
     }
 
     private void executeActionsAsync(String actionsJson) {
@@ -121,7 +176,7 @@ public class ChatActivity extends AppCompatActivity {
             }
             List<String> results = service.executeActions(actionsJson);
             StringBuilder sb = new StringBuilder("操作结果:\n");
-            for (String r : results) sb.append("• ").append(r).append("\n");
+            for (String r : results) sb.append("- ").append(r).append("\n");
             runOnUiThread(() -> {
                 addMessage("system", sb.toString());
                 refreshScreenInfo();
@@ -130,44 +185,37 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void addMessage(String role, String content) {
-        messages.add(new ChatMessage(role, content));
-        adapter.notifyItemInserted(messages.size() - 1);
-        rvChat.scrollToPosition(messages.size() - 1);
+        TextView tv = new TextView(this);
+        tv.setTextSize(15);
+        tv.setPadding(24, 12, 24, 12);
+        int color;
+        switch (role) {
+            case "user":
+                color = 0xFF90EE90;
+                tv.setGravity(Gravity.END);
+                tv.setText("你: " + content);
+                break;
+            case "ai":
+                color = 0xFFB0C4DE;
+                tv.setText(content);
+                break;
+            default:
+                color = 0xFFFFA500;
+                tv.setText(content);
+                break;
+        }
+        tv.setTextColor(color);
+        chatContainer.addView(tv);
+        scrollToBottom();
     }
 
-    // Simple adapter
-    private static class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.VH> {
-        private final List<ChatMessage> list;
-        ChatAdapter(List<ChatMessage> list) { this.list = list; }
+    private void scrollToBottom() {
+        handler.postDelayed(() -> scrollView.fullScroll(View.FOCUS_DOWN), 50);
+    }
 
-        @Override
-        public VH onCreateViewHolder(android.view.ViewGroup parent, int viewType) {
-            TextView tv = new TextView(parent.getContext());
-            tv.setPadding(24, 16, 24, 16);
-            tv.setTextSize(15);
-            tv.setMaxLines(Integer.MAX_VALUE);
-            return new VH(tv);
-        }
-
-        @Override
-        public void onBindViewHolder(VH holder, int position) {
-            ChatMessage msg = list.get(position);
-            TextView tv = (TextView) holder.itemView;
-            String prefix;
-            int color;
-            switch (msg.role) {
-                case "user": prefix = "🧑 你: "; color = 0xFF4CAF50; break;
-                case "ai": prefix = "🤖 AI: "; color = 0xFF2196F3; break;
-                default: prefix = "ℹ️ "; color = 0xFFFF9800; break;
-            }
-            tv.setText(prefix + msg.content);
-            tv.setTextColor(color);
-        }
-
-        @Override public int getItemCount() { return list.size(); }
-
-        static class VH extends RecyclerView.ViewHolder {
-            VH(android.view.View v) { super(v); }
-        }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (thinkingRunnable != null) handler.removeCallbacks(thinkingRunnable);
     }
 }

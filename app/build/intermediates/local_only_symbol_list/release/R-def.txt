@@ -33,6 +33,7 @@ id btn_save_ai
 id btn_send
 id btn_settings
 id btn_start
+id chat_container
 id et_ai_key
 id et_ai_name
 id et_ai_url
@@ -45,7 +46,7 @@ id login_progress
 id rb_applied
 id rb_custom
 id rg_ai_mode
-id rv_chat
+id scroll_chat
 id tv_apply_content
 id tv_no_account
 id tv_screen_info

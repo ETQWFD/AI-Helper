@@ -4438,7 +4438,7 @@
             "outputFile": "com.etc.aihelper.app-merged_res-30:/values_values.arsc.flat",
             "map": [
                 {
-                    "source": "/home/user/AI-Helper-project/app/src/main/res/values/colors.xml",
+                    "source": "/sandboxdata/workspace/file/AI-Helper-build/app/src/main/res/values/colors.xml",
                     "from": {
                         "startLines": "8,9,2,12,11,13,3,10,14,15,4,7,5,6",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -4472,23 +4472,6 @@
                     }
                 },
                 {
-                    "source": "/home/user/AI-Helper-project/app/src/main/res/values/strings.xml",
-                    "from": {
-                        "startLines": "3,2,1",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "119,59,16",
-                        "endColumns": "109,59,42",
-                        "endOffsets": "224,114,54"
-                    },
-                    "to": {
-                        "startLines": "1954,1955,1957",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "128839,128949,129092",
-                        "endColumns": "109,59,42",
-                        "endOffsets": "128944,129004,129130"
-                    }
-                },
-                {
                     "source": "/home/user/.gradle/caches/transforms-3/e5ed6143adbb4e76284add51ce427304/transformed/appcompat-resources-1.6.1/res/values/values.xml",
                     "from": {
                         "startLines": "2,18,24,34,50",
@@ -4508,25 +4491,6 @@
                     }
                 },
                 {
-                    "source": "/home/user/AI-Helper-project/app/src/main/res/values/themes.xml",
-                    "from": {
-                        "startLines": "1",
-                        "startColumns": "4",
-                        "startOffsets": "63",
-                        "endLines": "8",
-                        "endColumns": "12",
-                        "endOffsets": "534"
-                    },
-                    "to": {
-                        "startLines": "6264",
-                        "startColumns": "4",
-                        "startOffsets": "437490",
-                        "endLines": "6271",
-                        "endColumns": "12",
-                        "endOffsets": "437961"
-                    }
-                },
-                {
                     "source": "/home/user/.gradle/caches/transforms-3/8255cf8f73e0ec2d884b3aa8102e6cd4/transformed/coordinatorlayout-1.1.0/res/values/values.xml",
                     "from": {
                         "startLines": "2,3,6,16",
@@ -4543,6 +4507,23 @@
                         "endLines": "109,9050,11002,11086",
                         "endColumns": "60,12,24,24",
                         "endOffsets": "5821,626794,697624,702140"
+                    }
+                },
+                {
+                    "source": "/sandboxdata/workspace/file/AI-Helper-build/app/src/main/res/values/strings.xml",
+                    "from": {
+                        "startLines": "3,2,1",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "119,59,16",
+                        "endColumns": "109,59,42",
+                        "endOffsets": "224,114,54"
+                    },
+                    "to": {
+                        "startLines": "1954,1955,1957",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "128839,128949,129092",
+                        "endColumns": "109,59,42",
+                        "endOffsets": "128944,129004,129130"
                     }
                 },
                 {
@@ -4765,6 +4746,25 @@
                         "endLines": "504,1112,1113,1114,1122,1123,1124,1789,12469",
                         "endColumns": "55,58,47,55,74,75,71,65,24",
                         "endOffsets": "25533,66452,66500,66556,67242,67318,67390,118738,753027"
+                    }
+                },
+                {
+                    "source": "/sandboxdata/workspace/file/AI-Helper-build/app/src/main/res/values/themes.xml",
+                    "from": {
+                        "startLines": "1",
+                        "startColumns": "4",
+                        "startOffsets": "63",
+                        "endLines": "8",
+                        "endColumns": "12",
+                        "endOffsets": "534"
+                    },
+                    "to": {
+                        "startLines": "6264",
+                        "startColumns": "4",
+                        "startOffsets": "437490",
+                        "endLines": "6271",
+                        "endColumns": "12",
+                        "endOffsets": "437961"
                     }
                 },
                 {

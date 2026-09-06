@@ -146,7 +146,7 @@ public class AccountManager {
             conn.setConnectTimeout(15000);
             conn.setReadTimeout(20000);
             conn.setRequestMethod("GET");
-            conn.setRequestProperty("User-Agent", "AIHelper/0.1");
+            conn.setRequestProperty("User-Agent", "AIHelper/0.2");
             int code = conn.getResponseCode();
             if (code != 200) return null;
             BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));

@@ -80,7 +80,7 @@ public class UpdateChecker {
                     return;
                 }
 
-                String currentVersion = "0.1";
+                String currentVersion = "0.2";
                 if (isNewerVersion(tagName, currentVersion)) {
                     postUpdateAvailable(callback, tagName, downloadUrl, body);
                 } else {
@@ -100,7 +100,7 @@ public class UpdateChecker {
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/vnd.github.v3+json");
-                conn.setRequestProperty("User-Agent", "AIHelper/0.1");
+                conn.setRequestProperty("User-Agent", "AIHelper/0.2");
                 conn.setConnectTimeout(20000);
                 conn.setReadTimeout(25000);
                 int code = conn.getResponseCode();
@@ -208,7 +208,7 @@ public class UpdateChecker {
             conn = (HttpURLConnection) url.openConnection();
             conn.setConnectTimeout(30000);
             conn.setReadTimeout(120000);
-            conn.setRequestProperty("User-Agent", "AIHelper/0.1");
+            conn.setRequestProperty("User-Agent", "AIHelper/0.2");
             conn.setInstanceFollowRedirects(true);
             InputStream is = conn.getInputStream();
 

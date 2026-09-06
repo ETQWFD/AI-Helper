@@ -59,12 +59,18 @@
     </ScrollView>
 
     <!-- Chat messages -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_chat"
+    <ScrollView
+        android:id="@+id/scroll_chat"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:padding="8dp"/>
+        android:padding="8dp">
+        <LinearLayout
+            android:id="@+id/chat_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"/>
+    </ScrollView>
 
     <!-- Input -->
     <LinearLayout

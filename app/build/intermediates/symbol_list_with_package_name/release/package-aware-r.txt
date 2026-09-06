@@ -3142,6 +3142,7 @@ id center_vertical
 id chain
 id chain2
 id chains
+id chat_container
 id checkbox
 id checked
 id chronometer
@@ -3394,7 +3395,6 @@ id right_icon
 id right_side
 id rounded
 id row_index_key
-id rv_chat
 id save_non_transition_alpha
 id save_overlay_view
 id sawtooth
@@ -3404,6 +3404,7 @@ id scroll
 id scrollIndicatorDown
 id scrollIndicatorUp
 id scrollView
+id scroll_chat
 id scrollable
 id search_badge
 id search_bar
