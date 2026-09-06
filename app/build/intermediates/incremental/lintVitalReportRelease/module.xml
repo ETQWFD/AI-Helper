@@ -1,6 +1,6 @@
 <lint-module
     format="1"
-    dir="/sandboxdata/workspace/file/AI-Helper-build/app"
+    dir="/sandboxdata/workspace/file/AI-Helper-v03/app"
     name=":app"
     type="APP"
     maven="AIHelper:app:"

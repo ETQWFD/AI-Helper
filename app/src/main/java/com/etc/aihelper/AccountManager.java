@@ -79,7 +79,7 @@ public class AccountManager {
                     finalStatus = spTmp.getString(App.KEY_ACCOUNT_STATUS, "enabled");
                 }
                 if (finalStatus.equalsIgnoreCase("banned")) {
-                    postError(callback, "该账号已被封禁，请联系开发者");
+                    postError(callback, "您的账号涉嫌倒卖、涉黄等违规行为，已被管理员封禁。\n\n如有疑误，请联系管理员帮忙解封。\n\n联系邮箱: " + App.APPLY_EMAIL);
                     return;
                 }
 
@@ -164,7 +164,7 @@ public class AccountManager {
             conn.setConnectTimeout(15000);
             conn.setReadTimeout(20000);
             conn.setRequestMethod("GET");
-            conn.setRequestProperty("User-Agent", "AIHelper/0.2");
+            conn.setRequestProperty("User-Agent", "AIHelper/0.3");
             int code = conn.getResponseCode();
             if (code != 200) return null;
             BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));

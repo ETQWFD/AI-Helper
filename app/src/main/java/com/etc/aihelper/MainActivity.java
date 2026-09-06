@@ -74,21 +74,29 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         updateUI();
-        // Check account status if logged in
         SharedPreferences sp = getSharedPreferences(App.PREFS, MODE_PRIVATE);
         if (sp.getBoolean(App.KEY_LOGGED_IN, false)) {
             String username = sp.getString(App.KEY_USERNAME, "");
             new AccountManager(this).checkStatus(username, new AccountManager.StatusCallback() {
                 @Override public void onResult(String status) {
                     if ("banned".equalsIgnoreCase(status)) {
-                        Toast.makeText(MainActivity.this, "账号已被封禁", Toast.LENGTH_LONG).show();
-                        new AccountManager(MainActivity.this).logout();
-                        updateUI();
+                        showBannedDialog();
                     }
                 }
                 @Override public void onError(String error) {}
             });
         }
+    }
+
+    private void showBannedDialog() {
+        new AccountManager(this).logout();
+        updateUI();
+        new AlertDialog.Builder(this)
+                .setTitle("账号已被封禁")
+                .setMessage("您的账号涉嫌倒卖、涉黄等违规行为，已被管理员封禁。\n\n如有疑误，请联系管理员帮忙解封。\n\n联系邮箱: " + App.APPLY_EMAIL)
+                .setPositiveButton("我知道了", null)
+                .setCancelable(false)
+                .show();
     }
 
     private void updateUI() {
