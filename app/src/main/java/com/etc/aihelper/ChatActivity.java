@@ -23,6 +23,8 @@ public class ChatActivity extends AppCompatActivity {
     private TextView tvScreenInfo;
     private AIClient aiClient;
     private boolean isProcessing = false;
+    private String aiIntent = "";
+    private int actionRound = 0;
     private final Handler handler = new Handler(Looper.getMainLooper());
     private Runnable thinkingRunnable;
     private TextView thinkingView;
@@ -78,17 +80,19 @@ public class ChatActivity extends AppCompatActivity {
         MyAccessibilityService service = MyAccessibilityService.getInstance();
         if (service != null) screenContext = service.getScreenDescription();
 
+        // 保存用户意图，用于连续操作循环
+        aiIntent = text;
+
         aiClient.sendMessage(text, screenContext, new AIClient.Callback() {
             @Override
             public void onSuccess(String response, String actionsJson) {
                 hideThinking();
-                isProcessing = false;
-                btnSend.setEnabled(true);
-                btnSend.setText("发送");
                 typeMessage(response, () -> {
                     if (actionsJson != null && !actionsJson.isEmpty()) {
                         addMessage("system", "正在执行操作...");
-                        executeActionsAsync(actionsJson);
+                        executeActionsAsync(actionsJson, true);
+                    } else {
+                        finishProcessing();
                     }
                 });
             }
@@ -96,9 +100,50 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onError(String error) {
                 hideThinking();
-                isProcessing = false;
-                btnSend.setEnabled(true);
-                btnSend.setText("发送");
+                finishProcessing();
+                addMessage("system", "错误: " + error);
+            }
+        });
+    }
+
+    private void finishProcessing() {
+        isProcessing = false;
+        btnSend.setEnabled(true);
+        btnSend.setText("发送");
+    }
+
+    // AI 连续操作循环：执行操作后自动分析新屏幕继续执行，最多5轮
+    private void aiLoop(int round) {
+        if (round > 5) {
+            addMessage("system", "已完成多轮操作。如需继续请发送新的指令。");
+            finishProcessing();
+            return;
+        }
+        showThinking();
+        String screenContext = "";
+        MyAccessibilityService service = MyAccessibilityService.getInstance();
+        if (service != null) screenContext = service.getScreenDescription();
+
+        String followUp = "请继续分析当前屏幕，执行下一步操作以完成我的要求: " + aiIntent +
+                "。如果任务已经完成，请直接说明已完成，不要再给操作指令。";
+        aiClient.sendMessage(followUp, screenContext, new AIClient.Callback() {
+            @Override
+            public void onSuccess(String response, String actionsJson) {
+                hideThinking();
+                typeMessage(response, () -> {
+                    if (actionsJson != null && !actionsJson.isEmpty()) {
+                        addMessage("system", "继续执行操作...");
+                        executeActionsAsync(actionsJson, true);
+                    } else {
+                        finishProcessing();
+                    }
+                });
+            }
+
+            @Override
+            public void onError(String error) {
+                hideThinking();
+                finishProcessing();
                 addMessage("system", "错误: " + error);
             }
         });
@@ -167,11 +212,14 @@ public class ChatActivity extends AppCompatActivity {
         handler.post(typeRunnable);
     }
 
-    private void executeActionsAsync(String actionsJson) {
+    private void executeActionsAsync(String actionsJson, boolean continueLoop) {
         new Thread(() -> {
             MyAccessibilityService service = MyAccessibilityService.getInstance();
             if (service == null) {
-                runOnUiThread(() -> addMessage("system", "无障碍服务未连接，无法执行操作"));
+                runOnUiThread(() -> {
+                    addMessage("system", "无障碍服务未连接，无法执行操作");
+                    finishProcessing();
+                });
                 return;
             }
             List<String> results = service.executeActions(actionsJson);
@@ -180,6 +228,12 @@ public class ChatActivity extends AppCompatActivity {
             runOnUiThread(() -> {
                 addMessage("system", sb.toString());
                 refreshScreenInfo();
+                if (continueLoop) {
+                    actionRound++;
+                    aiLoop(actionRound);
+                } else {
+                    finishProcessing();
+                }
             });
         }).start();
     }
