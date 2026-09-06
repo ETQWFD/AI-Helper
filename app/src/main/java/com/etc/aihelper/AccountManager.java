@@ -70,7 +70,15 @@ public class AccountManager {
 
                 // Fetch status
                 String status = fetchUrl(base + "status");
-                if (status != null && status.trim().equalsIgnoreCase("banned")) {
+                String finalStatus;
+                if (status != null && !status.trim().isEmpty()) {
+                    finalStatus = status.trim();
+                } else {
+                    // 网络拉取失败时，使用缓存的状态
+                    SharedPreferences spTmp = context.getSharedPreferences(App.PREFS, Context.MODE_PRIVATE);
+                    finalStatus = spTmp.getString(App.KEY_ACCOUNT_STATUS, "enabled");
+                }
+                if (finalStatus.equalsIgnoreCase("banned")) {
                     postError(callback, "该账号已被封禁，请联系开发者");
                     return;
                 }
@@ -83,7 +91,7 @@ public class AccountManager {
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putBoolean(App.KEY_LOGGED_IN, true);
                 editor.putString(App.KEY_USERNAME, username);
-                editor.putString(App.KEY_ACCOUNT_STATUS, status != null ? status.trim() : "enabled");
+                editor.putString(App.KEY_ACCOUNT_STATUS, finalStatus);
                 if (avatarB64 != null && !avatarB64.trim().isEmpty()) {
                     editor.putString(App.KEY_AVATAR, avatarB64.trim());
                 }
@@ -113,6 +121,16 @@ public class AccountManager {
                 postStatusError(callback, e.getMessage());
             }
         });
+    }
+
+    public void logout() {
+        SharedPreferences sp = context.getSharedPreferences(App.PREFS, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.remove(App.KEY_LOGGED_IN);
+        editor.remove(App.KEY_USERNAME);
+        editor.remove(App.KEY_ACCOUNT_STATUS);
+        editor.remove(App.KEY_AVATAR);
+        editor.apply();
     }
 
     private String fetchUrl(String urlStr) {

@@ -49,6 +49,24 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this, ApplyActivity.class)));
         btnStart.setOnClickListener(v -> startChat());
 
+        // 点击用户信息区域可登出
+        findViewById(R.id.tv_user_info).setOnClickListener(v -> {
+            if (sp.getBoolean(App.KEY_LOGGED_IN, false)) {
+                new AlertDialog.Builder(this)
+                        .setTitle("登出")
+                        .setMessage("确定要退出当前账号吗？")
+                        .setPositiveButton("登出", (d, w) -> {
+                            new AccountManager(this).logout();
+                            updateUI();
+                            Toast.makeText(this, "已退出登录", Toast.LENGTH_SHORT).show();
+                        })
+                        .setNegativeButton("取消", null)
+                        .show();
+            } else {
+                startActivity(new Intent(this, LoginActivity.class));
+            }
+        });
+
         updateUI();
     }
 
@@ -64,8 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override public void onResult(String status) {
                     if ("banned".equalsIgnoreCase(status)) {
                         Toast.makeText(MainActivity.this, "账号已被封禁", Toast.LENGTH_LONG).show();
-                        getSharedPreferences(App.PREFS, MODE_PRIVATE).edit()
-                                .putBoolean(App.KEY_LOGGED_IN, false).apply();
+                        new AccountManager(MainActivity.this).logout();
                         updateUI();
                     }
                 }
