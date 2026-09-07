@@ -36,8 +36,9 @@ public class ApplyActivity extends AppCompatActivity {
                 "2. 需要注册的用户名\n" +
                 "3. QQ号或其他联系邮箱\n" +
                 "4. 将要设置的密码\n\n" +
-                "开发者忙于上学，将在一年内回复。若未收到回复请重新申请。\n\n" +
-                "测试账号：demo / demo123";
+                "开发者目前是初中生，学业比较忙，可能无暇顾及，一般会在放假时查看邮件。\n" +
+                "我们将会在一年之内回复您，请见谅。\n" +
+                "若一年之内未收到回复，请重新发送申请。";
 
         tvContent.setText(content);
 

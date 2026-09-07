@@ -56,7 +56,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="v0.1"
+                android:text="v0.3"
                 android:textColor="@color/text_hint"
                 android:textSize="12sp"/>
         </LinearLayout>
@@ -87,6 +87,8 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:text="开始"
+            android:drawableStart="@drawable/ic_start"
+            android:drawablePadding="8dp"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@android:color/white"
@@ -99,6 +101,8 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:text="获取无障碍模式"
+            android:drawableStart="@drawable/ic_a11y"
+            android:drawablePadding="8dp"
             android:textColor="@color/text_primary"
             android:background="@drawable/btn_secondary"
             android:layout_marginBottom="10dp"/>
@@ -114,6 +118,8 @@
                 android:layout_height="48dp"
                 android:layout_weight="1"
                 android:text="登录"
+                android:drawableStart="@drawable/ic_login"
+                android:drawablePadding="6dp"
                 android:textColor="@color/text_primary"
                 android:background="@drawable/btn_secondary"
                 android:layout_marginEnd="6dp"/>
@@ -124,6 +130,8 @@
                 android:layout_height="48dp"
                 android:layout_weight="1"
                 android:text="设置"
+                android:drawableStart="@drawable/ic_settings"
+                android:drawablePadding="6dp"
                 android:textColor="@color/text_primary"
                 android:background="@drawable/btn_secondary"
                 android:layout_marginStart="6dp"
@@ -135,6 +143,8 @@
                 android:layout_height="48dp"
                 android:layout_weight="1"
                 android:text="申请"
+                android:drawableStart="@drawable/ic_apply"
+                android:drawablePadding="6dp"
                 android:textColor="@color/text_primary"
                 android:background="@drawable/btn_secondary"
                 android:layout_marginStart="6dp"/>

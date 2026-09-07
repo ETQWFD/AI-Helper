@@ -1,90 +1,114 @@
 [
     {
-        "merged": "com.etc.aihelper.app-merged_res-30:/mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "com.etc.aihelper.app-main-31:/mipmap-xxxhdpi/ic_launcher.png"
+        "merged": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-merged_res-30:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-main-31:/mipmap-hdpi/ic_launcher_round.png"
     },
     {
-        "merged": "com.etc.aihelper.app-merged_res-30:/mipmap-hdpi_ic_launcher_round.png.flat",
-        "source": "com.etc.aihelper.app-main-31:/mipmap-hdpi/ic_launcher_round.png"
+        "merged": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-merged_res-30:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-main-31:/mipmap-xhdpi/ic_launcher_round.png"
     },
     {
-        "merged": "com.etc.aihelper.app-merged_res-30:/layout_activity_apply.xml.flat",
-        "source": "com.etc.aihelper.app-main-31:/layout/activity_apply.xml"
+        "merged": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-merged_res-30:/drawable_btn_secondary.xml.flat",
+        "source": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-main-31:/drawable/btn_secondary.xml"
     },
     {
-        "merged": "com.etc.aihelper.app-merged_res-30:/layout_activity_chat.xml.flat",
-        "source": "com.etc.aihelper.app-main-31:/layout/activity_chat.xml"
+        "merged": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-merged_res-30:/xml_accessibility_service_config.xml.flat",
+        "source": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-main-31:/xml/accessibility_service_config.xml"
     },
     {
-        "merged": "com.etc.aihelper.app-merged_res-30:/layout_activity_settings.xml.flat",
-        "source": "com.etc.aihelper.app-main-31:/layout/activity_settings.xml"
+        "merged": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-merged_res-30:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-main-31:/mipmap-xxhdpi/ic_launcher_round.png"
     },
     {
-        "merged": "com.etc.aihelper.app-merged_res-30:/drawable_btn_secondary.xml.flat",
-        "source": "com.etc.aihelper.app-main-31:/drawable/btn_secondary.xml"
+        "merged": "com.etc.aihelper.app-merged_res-30:/drawable_ic_apply.xml.flat",
+        "source": "com.etc.aihelper.app-main-31:/drawable/ic_apply.xml"
     },
     {
-        "merged": "com.etc.aihelper.app-merged_res-30:/drawable_btn_primary.xml.flat",
-        "source": "com.etc.aihelper.app-main-31:/drawable/btn_primary.xml"
+        "merged": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-merged_res-30:/layout_activity_chat.xml.flat",
+        "source": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-main-31:/layout/activity_chat.xml"
     },
     {
-        "merged": "com.etc.aihelper.app-merged_res-30:/mipmap-xhdpi_ic_launcher_round.png.flat",
-        "source": "com.etc.aihelper.app-main-31:/mipmap-xhdpi/ic_launcher_round.png"
+        "merged": "com.etc.aihelper.app-merged_res-30:/drawable_ic_start.xml.flat",
+        "source": "com.etc.aihelper.app-main-31:/drawable/ic_start.xml"
     },
     {
-        "merged": "com.etc.aihelper.app-merged_res-30:/mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "com.etc.aihelper.app-main-31:/mipmap-xhdpi/ic_launcher.png"
+        "merged": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-merged_res-30:/xml_file_paths.xml.flat",
+        "source": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-main-31:/xml/file_paths.xml"
     },
     {
-        "merged": "com.etc.aihelper.app-merged_res-30:/drawable_ic_launcher_foreground.png.flat",
-        "source": "com.etc.aihelper.app-main-31:/drawable/ic_launcher_foreground.png"
+        "merged": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-merged_res-30:/drawable_circle_bg.xml.flat",
+        "source": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-main-31:/drawable/circle_bg.xml"
     },
     {
-        "merged": "com.etc.aihelper.app-merged_res-30:/mipmap-xxhdpi_ic_launcher_round.png.flat",
-        "source": "com.etc.aihelper.app-main-31:/mipmap-xxhdpi/ic_launcher_round.png"
+        "merged": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-merged_res-30:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-main-31:/mipmap-xhdpi/ic_launcher.png"
     },
     {
-        "merged": "com.etc.aihelper.app-merged_res-30:/mipmap-hdpi_ic_launcher.png.flat",
-        "source": "com.etc.aihelper.app-main-31:/mipmap-hdpi/ic_launcher.png"
+        "merged": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-merged_res-30:/drawable_ic_launcher_foreground.png.flat",
+        "source": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-main-31:/drawable/ic_launcher_foreground.png"
     },
     {
-        "merged": "com.etc.aihelper.app-merged_res-30:/layout_activity_login.xml.flat",
-        "source": "com.etc.aihelper.app-main-31:/layout/activity_login.xml"
-    },
-    {
-        "merged": "com.etc.aihelper.app-merged_res-30:/xml_file_paths.xml.flat",
-        "source": "com.etc.aihelper.app-main-31:/xml/file_paths.xml"
-    },
-    {
-        "merged": "com.etc.aihelper.app-merged_res-30:/mipmap-mdpi_ic_launcher.png.flat",
-        "source": "com.etc.aihelper.app-main-31:/mipmap-mdpi/ic_launcher.png"
-    },
-    {
-        "merged": "com.etc.aihelper.app-merged_res-30:/mipmap-mdpi_ic_launcher_round.png.flat",
-        "source": "com.etc.aihelper.app-main-31:/mipmap-mdpi/ic_launcher_round.png"
-    },
-    {
-        "merged": "com.etc.aihelper.app-merged_res-30:/mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "com.etc.aihelper.app-main-31:/mipmap-xxhdpi/ic_launcher.png"
-    },
-    {
-        "merged": "com.etc.aihelper.app-merged_res-30:/drawable_circle_bg.xml.flat",
-        "source": "com.etc.aihelper.app-main-31:/drawable/circle_bg.xml"
-    },
-    {
-        "merged": "com.etc.aihelper.app-merged_res-30:/drawable_edit_bg.xml.flat",
-        "source": "com.etc.aihelper.app-main-31:/drawable/edit_bg.xml"
-    },
-    {
-        "merged": "com.etc.aihelper.app-merged_res-30:/xml_accessibility_service_config.xml.flat",
-        "source": "com.etc.aihelper.app-main-31:/xml/accessibility_service_config.xml"
-    },
-    {
-        "merged": "com.etc.aihelper.app-merged_res-30:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
-        "source": "com.etc.aihelper.app-main-31:/mipmap-xxxhdpi/ic_launcher_round.png"
+        "merged": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-merged_res-30:/layout_activity_settings.xml.flat",
+        "source": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-main-31:/layout/activity_settings.xml"
     },
     {
         "merged": "com.etc.aihelper.app-merged_res-30:/layout_activity_main.xml.flat",
         "source": "com.etc.aihelper.app-main-31:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-merged_res-30:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-main-31:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-merged_res-30:/drawable_btn_primary.xml.flat",
+        "source": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-main-31:/drawable/btn_primary.xml"
+    },
+    {
+        "merged": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-merged_res-30:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-main-31:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-merged_res-30:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-main-31:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-merged_res-30:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-main-31:/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-merged_res-30:/layout_activity_main.xml.flat",
+        "source": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-main-31:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-merged_res-30:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-main-31:/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.etc.aihelper.app-merged_res-30:/drawable_ic_settings.xml.flat",
+        "source": "com.etc.aihelper.app-main-31:/drawable/ic_settings.xml"
+    },
+    {
+        "merged": "com.etc.aihelper.app-merged_res-30:/drawable_ic_a11y.xml.flat",
+        "source": "com.etc.aihelper.app-main-31:/drawable/ic_a11y.xml"
+    },
+    {
+        "merged": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-merged_res-30:/drawable_edit_bg.xml.flat",
+        "source": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-main-31:/drawable/edit_bg.xml"
+    },
+    {
+        "merged": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-merged_res-30:/layout_activity_login.xml.flat",
+        "source": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-main-31:/layout/activity_login.xml"
+    },
+    {
+        "merged": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-merged_res-30:/layout_activity_apply.xml.flat",
+        "source": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-main-31:/layout/activity_apply.xml"
+    },
+    {
+        "merged": "com.etc.aihelper.app-merged_res-30:/drawable_ic_login.xml.flat",
+        "source": "com.etc.aihelper.app-main-31:/drawable/ic_login.xml"
+    },
+    {
+        "merged": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-merged_res-30:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "/home/user/.gradle/daemon/7.5/com.etc.aihelper.app-main-31:/mipmap-mdpi/ic_launcher.png"
     }
 ]

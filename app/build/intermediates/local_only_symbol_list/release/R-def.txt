@@ -18,7 +18,12 @@ drawable btn_primary
 drawable btn_secondary
 drawable circle_bg
 drawable edit_bg
+drawable ic_a11y
+drawable ic_apply
 drawable ic_launcher_foreground
+drawable ic_login
+drawable ic_settings
+drawable ic_start
 id btn_apply
 id btn_apply_back
 id btn_back
